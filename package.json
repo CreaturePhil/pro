@@ -2,10 +2,6 @@
   "name": "pro-cli",
   "version": "1.0.0",
   "description": "Personal package manager",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+  "author": "Philip La <birkal@outlook.com>",
+  "license": "MIT"
 }

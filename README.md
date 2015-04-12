@@ -27,3 +27,7 @@ Get file:
 ```js
 $ pro index.html
 ```
+
+# License
+
+[MIT](LICENSE)

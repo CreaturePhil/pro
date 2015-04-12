@@ -3,5 +3,6 @@
   "version": "1.0.0",
   "description": "Personal package manager",
   "author": "Philip La <birkal@outlook.com>",
+  "main": "index.js",
   "license": "MIT"
 }

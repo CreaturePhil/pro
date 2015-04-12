@@ -28,6 +28,18 @@ Get file:
 $ pro index.html
 ```
 
+List repositories:
+
+```js
+$ pro list user
+```
+
+List files:
+
+```js
+$ pro list files
+```
+
 # License
 
 [MIT](LICENSE)

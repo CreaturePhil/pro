@@ -6,11 +6,38 @@
  * Module dependencies.
  */
  
+var fs = require('fs');
+var path = require('path');
 var program = require('commander');
 
 program
   .version('1.0.0')
   .usage('[file or repository]');
+
+var userPath = path.join(__dirname, 'user.txt');
+var filePath = path.join(__dirname, 'file.txt');
+
+program
+  .command('set <type> <name>')
+  .description('Set your Github username or repository for files')
+  .action(function(type, name) {
+    if (type === 'user') {
+      fs.writeFile(userPath, name, function(err) {
+        if (err) throw err;
+        console.log('[pro] user set to ' + name);
+      });
+    } else if (type === 'file') {
+      fs.exists(userPath, function(exists) {
+        if (!exists) return console.log('Set user first: pro set user [name]');
+        fs.writeFile(filePath, name, function(err) {
+          if (err) throw err;
+          console.log('[pro] file set to ' + name);
+        });
+      });
+    } else {
+      console.log('pro set [user or file] [name]');  
+    }
+  });
 
 program.parse(process.argv);
 

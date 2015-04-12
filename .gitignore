@@ -33,3 +33,6 @@ npm-debug.log
 
 # Windows executables commands
 *.cmd
+
+# Text files
+*.txt

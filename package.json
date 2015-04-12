@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Personal package manager",
   "author": "Philip La <birkal@outlook.com>",
-  "main": "index.js",
+  "main": "bin/extract",
+  "preferGlobal": true,
+  "bin": {
+    "pro": "./bin/pro"
+  },
   "license": "MIT"
 }

@@ -18,6 +18,21 @@ var userPath = path.join(__dirname, 'user.txt');
 var filePath = path.join(__dirname, 'file.txt');
 
 program
+  .command('*')
+  .description('Get project files or repositories')
+  .action(function(source) {
+    if (source.indexOf('.') <= -1) {
+      fs.exists(userPath, function(exists) {
+        if (!exists) return console.log('Set your user: pro set user [name]');
+      });
+    } else {
+      fs.exists(filePath, function(exists) {
+        if (!exists) return console.log('Set your file: pro set file [name]');
+      });
+    }
+  });
+
+program
   .command('set <type> <name>')
   .description('Set your Github username or repository for files')
   .action(function(type, name) {
@@ -28,7 +43,7 @@ program
       });
     } else if (type === 'file') {
       fs.exists(userPath, function(exists) {
-        if (!exists) return console.log('Set user first: pro set user [name]');
+        if (!exists) return console.log('Set your user: pro set user [name]');
         fs.writeFile(filePath, name, function(err) {
           if (err) throw err;
           console.log('[pro] file set to ' + name);

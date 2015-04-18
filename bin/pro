@@ -11,6 +11,7 @@ var https = require('https');
 var path = require('path');
 var program = require('commander');
 var rimraf = require('rimraf');
+var Table = require('cli-table');
 var exec = require('child_process').exec;
 
 program
@@ -99,6 +100,41 @@ program
     } else {
       console.log('pro set [user or file] [name]');  
     }
+  });
+
+program
+  .command('files')
+  .description('Get a list of all your files.')
+  .action(function(type, name) {
+    fs.exists(userPath, function(exists) {
+      if (!exists) return console.log('Set your user: pro set user [name]');
+      fs.exists(filePath, function(exists) {
+        if (!exists) return console.log('Set your file: pro set file [name]');
+        fs.readFile(userPath, 'utf-8', function(err, user) {
+          fs.readFile(filePath, 'utf-8', function(err, file) {
+            var url = 'git clone -q --depth=1 https://github.com/' + user + '/' + file + '.git .';
+            exec(url, function(err, stdout, stderr) {
+              if (err) throw err;
+              var cwd = process.cwd();
+              rimraf(path.join(cwd, '.git'), function(err) {
+                if (err) throw err; 
+                fs.readdir(process.cwd(), function(err, files) {
+                  if (err) throw err;
+                  var table = new Table();
+                  table.push(files);
+                  console.log(table.toString());
+                  files.forEach(function(file) {
+                    fs.unlink(path.join(cwd, file), function(err) {
+                      if (err) throw err;
+                    });
+                  });
+                });
+              });
+            });
+          });
+        });
+      });
+    });
   });
 
 program.parse(process.argv);

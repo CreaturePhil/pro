@@ -10,7 +10,7 @@ Set Github username:
 $ pro set user creaturephil
 ```
 
-Get project directory:
+Get project directory (installs in current directory):
 
 ```js
 $ pro bootstrap
@@ -22,22 +22,16 @@ Set repository for files: (must set username first)
 $ pro set file files
 ```
 
-Get file:
+Get file (installs in current directory):
 
 ```js
 $ pro index.html
 ```
 
-List repositories:
+List repositories and files:
 
 ```js
-$ pro list user
-```
-
-List files:
-
-```js
-$ pro list files
+$ pro list
 ```
 
 # License

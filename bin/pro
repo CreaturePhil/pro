@@ -9,6 +9,7 @@
 var fs = require('fs');
 var path = require('path');
 var program = require('commander');
+var exec = require('child_process').exec;
 
 program
   .version('1.0.0')
@@ -24,12 +25,40 @@ program
     if (source.indexOf('.') <= -1) {
       fs.exists(userPath, function(exists) {
         if (!exists) return console.log('Set your user: pro set user [name]');
+        fs.readFile(userPath, 'utf-8', function(err, user) {
+          var url = 'git clone -q --depth=1 https://github.com/' + user + '/' + source + '.git .';
+          exec(url, function(err, stdout, stderr) {
+            if (err) throw err;
+            console.log(path.join(process.cwd(), '.git'));
+            console.log('Done.');
+          });
+        });
       });
     } else {
       fs.exists(filePath, function(exists) {
         if (!exists) return console.log('Set your file: pro set file [name]');
       });
     }
+  });
+
+program
+  .command('list')
+  .description('List your Github username or repository for files')
+  .action(function() {
+    fs.exists(userPath, function(exists) {
+      if (!exists) return console.log('Set your user: pro set user [name]');
+      fs.readFile(userPath, 'utf-8', function(err, user) {
+        if (err) throw err;
+        fs.exists(filePath, function(exists) {
+          if (!exists) return console.log('User: ' + user);
+          fs.readFile(filePath, 'utf-8', function(err, file) {
+            if (err) throw err;
+            console.log('User: ' + user);
+            console.log('File: ' + file);
+          });
+        });
+      });
+    });
   });
 
 program

@@ -26,13 +26,14 @@ program
     if (source.indexOf('.') <= -1) {
       fs.exists(userPath, function(exists) {
         if (!exists) return console.log('Set your user: pro set user [name]');
+        console.log('Getting "' + source + '" repository');
         fs.readFile(userPath, 'utf-8', function(err, user) {
           var url = 'git clone -q --depth=1 https://github.com/' + user + '/' + source + '.git .';
           exec(url, function(err, stdout, stderr) {
             if (err) throw err;
             rimraf(path.join(process.cwd(), '.git'), function(err) {
               if (err) throw err; 
-              console.log('Done.');
+              console.log('\nDone, without errors.\n');
             });
           });
         });

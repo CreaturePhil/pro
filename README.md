@@ -28,10 +28,22 @@ Get file (installs in current directory):
 $ pro index.html
 ```
 
-List repositories and files:
+List repositories and files location:
 
 ```js
 $ pro list
+```
+
+List repositories:
+
+```js
+$ pro repos
+```
+
+List files:
+
+```js
+$ pro files
 ```
 
 # License

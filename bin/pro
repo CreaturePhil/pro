@@ -7,6 +7,7 @@
  */
  
 var fs = require('fs');
+var https = require('https');
 var path = require('path');
 var program = require('commander');
 var rimraf = require('rimraf');
@@ -23,9 +24,9 @@ program
   .command('*')
   .description('Get project files or repositories')
   .action(function(source) {
-    if (source.indexOf('.') <= -1) {
-      fs.exists(userPath, function(exists) {
-        if (!exists) return console.log('Set your user: pro set user [name]');
+    fs.exists(userPath, function(exists) {
+      if (!exists) return console.log('Set your user: pro set user [name]');
+      if (source.indexOf('.') <= -1) {
         console.log('Getting "' + source + '" repository');
         fs.readFile(userPath, 'utf-8', function(err, user) {
           var url = 'git clone -q --depth=1 https://github.com/' + user + '/' + source + '.git .';
@@ -37,12 +38,25 @@ program
             });
           });
         });
-      });
-    } else {
-      fs.exists(filePath, function(exists) {
-        if (!exists) return console.log('Set your file: pro set file [name]');
-      });
-    }
+      } else {
+        fs.exists(filePath, function(exists) {
+          if (!exists) return console.log('Set your file: pro set file [name]');
+          fs.readFile(userPath, 'utf-8', function(err, user) {
+            fs.readFile(filePath, 'utf-8', function(err, file) {
+              var localFile = fs.createWriteStream(path.join(process.cwd(), source));
+              var url = 'https://raw.githubusercontent.com/' + user + '/' + file + '/master/' + source;
+              https.get(url, function(response) {
+                response.pipe(localFile);
+                localFile.on('finish', function() {
+                  localFile.close();
+                  console.log('\nDone, without errors.\n');
+                });
+              });
+            });
+          });
+        });
+      }
+    });
   });
 
 program

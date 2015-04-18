@@ -103,6 +103,29 @@ program
   });
 
 program
+  .command('repos')
+  .description('Get a list of all your repos.')
+  .action(function(type, name) {
+    fs.exists(userPath, function(exists) {
+      if (!exists) return console.log('Set your user: pro set user [name]');
+      fs.readFile(userPath, 'utf-8', function(err, user) {
+        var url = 'https://api.github.com/users/' + user + '/repos';
+        https.get(url, function(res) {
+          var data = '';
+
+          res.on('data', function(chunk) {
+            data += chunk;
+          });
+          
+          res.on('end', function() {
+            console.log(data);
+          });
+        });
+      });
+    });
+  });
+
+program
   .command('files')
   .description('Get a list of all your files.')
   .action(function(type, name) {
@@ -112,21 +135,19 @@ program
         if (!exists) return console.log('Set your file: pro set file [name]');
         fs.readFile(userPath, 'utf-8', function(err, user) {
           fs.readFile(filePath, 'utf-8', function(err, file) {
-            var url = 'git clone -q --depth=1 https://github.com/' + user + '/' + file + '.git .';
+            var url = 'git clone -q --depth=1 https://github.com/' + user + '/' + file + '.git profileslistings';
             exec(url, function(err, stdout, stderr) {
               if (err) throw err;
-              var cwd = process.cwd();
+              var cwd = path.join(process.cwd(), 'profileslistings');
               rimraf(path.join(cwd, '.git'), function(err) {
                 if (err) throw err; 
-                fs.readdir(process.cwd(), function(err, files) {
+                fs.readdir(cwd, function(err, files) {
                   if (err) throw err;
                   var table = new Table();
                   table.push(files);
                   console.log(table.toString());
-                  files.forEach(function(file) {
-                    fs.unlink(path.join(cwd, file), function(err) {
-                      if (err) throw err;
-                    });
+                  rimraf(cwd, function(err) {
+                    if (err) throw err;
                   });
                 });
               });

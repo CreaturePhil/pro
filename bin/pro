@@ -15,7 +15,7 @@ var Table = require('cli-table');
 var exec = require('child_process').exec;
 
 program
-  .version('1.0.1')
+  .version('1.0.2')
   .usage('[file or repository]');
 
 var userPath = path.join(__dirname, 'user.txt');

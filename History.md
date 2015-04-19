@@ -2,6 +2,8 @@
 ==================
 
   * Change file -> files
+  * Add chalk
+  * Fix Not found error when getting file
 
 1.0.3 / 2015-04-18
 ==================

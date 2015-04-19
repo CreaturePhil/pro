@@ -1,4 +1,4 @@
-[![pro](http://i.imgur.com/2mdqtbX.png)](https://www.npmjs.com/package/pro-cli)
+[![pro](http://i.imgur.com/92f2T1C.png)](https://www.npmjs.com/package/pro-cli)
 
 Personal package manager that helps you to kickstart new projects.
 

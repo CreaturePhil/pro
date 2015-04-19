@@ -11,7 +11,23 @@
   "bin": {
     "pro": "./bin/pro"
   },
+  "keywords": [
+    "web",
+    "api",
+    "package",
+    "package manager",
+    "git",
+    "fast",
+    "pro",
+    "cli",
+    "repositories"
+  ],
   "license": "MIT",
+  "repository": "creaturephil/pro",
+  "files": [
+    "LICENSE",
+    "bin/"
+  ],
   "dependencies": {
     "cli-table": "^0.3.1",
     "commander": "^2.7.1",
@@ -20,5 +36,8 @@
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-jshint": "^0.11.1"
+  },
+  "engines": {
+    "node": ">= 0.10"
   }
 }

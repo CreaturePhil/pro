@@ -69,7 +69,7 @@ Getting "alpha" repository
 Done, without errors.
 ```
 
-To set repository for quickly installing a single file which you must set your
+To set a repository for quickly installing a single file which you must set your
 Github username first to do this action:
 
 ```js
@@ -87,7 +87,7 @@ Done, without errors.
 ```
 
 The difference between getting a repository or a file is specifying the 
-character ".". `pro index` will get the index repository and `pro index.html`
+character "__.__". `pro index` will get the index repository and `pro index.html`
 will get the index.html file from your files repository.
 
 List your set Github username and files repository:

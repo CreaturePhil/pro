@@ -14,7 +14,7 @@ Personal package manager that helps you to kickstart new projects.
 $ npm install -g pro-cli
 ```
 
-## Docs
+## Quick Start
 
 Set Github username:
 
@@ -22,37 +22,89 @@ Set Github username:
 $ pro set user creaturephil
 ```
 
-Get project directory (installs in current directory):
+Create a directory and get repository (installs in current directory):
 
 ```js
-$ pro bootstrap
+$ mkdir myawesomeapp && cd myawesomeapp
+$ pro Showdown-Boilerplate
 ```
 
-Set repository for files: (must set username first)
+## Usage
+
+```bash
+Usage: pro [file or repository]
+
+
+Commands:
+
+  *                  Get project files or repositories
+  list               List your Github username or repository for files
+  set <type> <name>  Set your Github username or repository for files
+  repos              Get a list of all your repos.
+  files              Get a list of all your files.
+
+Options:
+
+  -h, --help     output usage information
+  -V, --version  output the version number
+```
+
+## Documentation
+
+pro uses Github to host your packages. This is because it is fast and easy to
+create a new one and push it to Github for immediate use. 
+The first thing you need to do is set Github username:
 
 ```js
-$ pro set files files
+$ pro set user CreaturePhil
+[pro] user set to CreaturePhil
 ```
 
-Get file (installs in current directory):
+Then to get a repository that will install in the current directory:
+
+```js
+$ pro alpha
+Getting "alpha" repository
+
+Done, without errors.
+```
+
+To set repository for quickly installing a single file which you must set your
+Github username first to do this action:
+
+```js
+$ pro set files scaffold
+[pro] files set to grid
+```
+
+Getting the file that will install in the current directory:
 
 ```js
 $ pro index.html
+Getting "index.html" file
+
+Done, without errors.
 ```
 
-List repositories and files location:
+The difference between getting a repository or a file is specifying the 
+character ".". `pro index` will get the index repository and `pro index.html`
+will get the index.html file from your files repository.
+
+List your set Github username and files repository:
 
 ```js
 $ pro list
+User: CreaturePhil
+Files: scaffold
 ```
 
-List repositories:
+List all Github repositories:
 
 ```js
 $ pro repos
 ```
 
-List files:
+List all files:
 
 ```js
 $ pro files

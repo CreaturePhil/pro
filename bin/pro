@@ -6,6 +6,7 @@
  * Module dependencies.
  */
 
+var chalk = require('chalk');
 var fs = require('fs');
 var https = require('https');
 var path = require('path');
@@ -35,22 +36,24 @@ program
             if (err) throw err;
             rimraf(path.join(process.cwd(), '.git'), function(err) {
               if (err) throw err;
-              console.log('\nDone, without errors.\n');
+              console.log(chalk.green('\nDone, without errors.\n'));
             });
           });
         });
       } else {
         fs.exists(filePath, function(exists) {
-          if (!exists) return console.log('Set your file: pro set file [name]');
+          console.log('Getting "' + source + '" file');
+          if (!exists) return console.log('Set your files: pro set files [name]');
           fs.readFile(userPath, 'utf-8', function(err, user) {
             fs.readFile(filePath, 'utf-8', function(err, file) {
               var localFile = fs.createWriteStream(path.join(process.cwd(), source));
               var url = 'https://raw.githubusercontent.com/' + user + '/' + file + '/master/' + source;
               https.get(url, function(response) {
+                if (response.statusCode === 404) throw new Error('404 Not Found');
                 response.pipe(localFile);
                 localFile.on('finish', function() {
                   localFile.close();
-                  console.log('\nDone, without errors.\n');
+                  console.log(chalk.green('\nDone, without errors.\n'));
                 });
               });
             });
@@ -73,7 +76,7 @@ program
           fs.readFile(filePath, 'utf-8', function(err, file) {
             if (err) throw err;
             console.log('User: ' + user);
-            console.log('File: ' + file);
+            console.log('Files: ' + file);
           });
         });
       });
@@ -87,18 +90,18 @@ program
     if (type === 'user') {
       fs.writeFile(userPath, name, function(err) {
         if (err) throw err;
-        console.log('[pro] user set to ' + name);
+        console.log('[' + chalk.bold.gray('pro') + '] user set to ' + name);
       });
-    } else if (type === 'file') {
+    } else if (type === 'files') {
       fs.exists(userPath, function(exists) {
         if (!exists) return console.log('Set your user: pro set user [name]');
         fs.writeFile(filePath, name, function(err) {
           if (err) throw err;
-          console.log('[pro] file set to ' + name);
+          console.log('[' + chalk.bold.gray('pro') + '] files set to ' + name);
         });
       });
     } else {
-      console.log('pro set [user or file] [name]');
+      console.log('pro set [user or files] [name]');
     }
   });
 
@@ -152,7 +155,7 @@ program
     fs.exists(userPath, function(exists) {
       if (!exists) return console.log('Set your user: pro set user [name]');
       fs.exists(filePath, function(exists) {
-        if (!exists) return console.log('Set your file: pro set file [name]');
+        if (!exists) return console.log('Set your files: pro set files [name]');
         fs.readFile(userPath, 'utf-8', function(err, user) {
           fs.readFile(filePath, 'utf-8', function(err, file) {
             var url = 'git clone -q --depth=1 https://github.com/' + user + '/' + file + '.git profileslistings';

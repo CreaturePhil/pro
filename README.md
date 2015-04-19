@@ -19,7 +19,7 @@ $ pro bootstrap
 Set repository for files: (must set username first)
 
 ```js
-$ pro set file files
+$ pro set files files
 ```
 
 Get file (installs in current directory):

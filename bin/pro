@@ -18,8 +18,8 @@ program
   .version('1.0.2')
   .usage('[file or repository]');
 
-var userPath = path.join(__dirname, 'user.txt');
-var filePath = path.join(__dirname, 'file.txt');
+var userPath = path.join(__dirname, '..', 'user.txt');
+var filePath = path.join(__dirname, '..', 'file.txt');
 
 program
   .command('*')

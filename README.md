@@ -1,8 +1,20 @@
-# pro
+[![pro](http://i.imgur.com/2mdqtbX.png)](https://www.npmjs.com/package/pro-cli)
 
-Personal package manager
+Personal package manager that helps you to kickstart new projects.
 
-pro helps you to kickstart new projects.
+[![NPM Version](https://img.shields.io/npm/v/pro-cli.svg)](https://www.npmjs.com/package/pro-cli)
+[![NPM Downloads](https://img.shields.io/npm/dm/pro-cli.svg)](https://www.npmjs.com/package/pro-cli)
+[![Build Status](https://travis-ci.org/CreaturePhil/pro.svg?branch=master)](https://travis-ci.org/CreaturePhil/pro)
+[![Dependency Status](https://david-dm.org/creaturephil/pro.svg)](https://david-dm.org/creaturephil/pro)
+[![devDependency Status](https://david-dm.org/creaturephil/pro/dev-status.svg)](https://david-dm.org/creaturephil/pro#info=devDependencies)
+
+## Installation
+
+```bash
+$ npm install -g pro-cli
+```
+
+## Docs
 
 Set Github username:
 

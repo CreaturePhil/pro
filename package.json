@@ -1,7 +1,7 @@
 {
   "name": "pro-cli",
   "version": "1.0.3",
-  "description": "Personal package manager",
+  "description": "Personal package manager that helps you to kickstart new projects.",
   "author": "Philip La <birkal@outlook.com>",
   "main": "bin/extract",
   "preferGlobal": true,

@@ -109,17 +109,37 @@ program
     fs.exists(userPath, function(exists) {
       if (!exists) return console.log('Set your user: pro set user [name]');
       fs.readFile(userPath, 'utf-8', function(err, user) {
-        var url = 'https://api.github.com/users/' + user + '/repos';
-        https.get(url, function(res) {
+        var options = {
+          host: 'api.github.com',
+          path: '/users/' + user + '/repos',
+          method: 'GET',
+          headers: {'user-agent': 'node.js'}
+        };
+
+        https.get(options, function(res) {
           var data = '';
 
           res.on('data', function(chunk) {
             data += chunk;
           });
-          
+
           res.on('end', function() {
-            console.log(data);
+            var repos = JSON.parse(data);
+            var table = new Table();
+            var chunk = 2;
+
+            repos = repos.map(function(repo) {
+              return repo.name;
+            });
+
+            for (var i = 0, len = repos.length; i < len; i += chunk) {
+              table.push(repos.slice(i, i + chunk));
+            }
+
+            console.log(table.toString());
           });
+        }).on('error', function(err) {
+          if (err) throw err;
         });
       });
     });
@@ -144,7 +164,12 @@ program
                 fs.readdir(cwd, function(err, files) {
                   if (err) throw err;
                   var table = new Table();
-                  table.push(files);
+                  var chunk = 2;
+
+                  for (var i = 0, len = files.length; i < len; i += chunk) {
+                    table.push(files.slice(i, i + chunk));
+                  }
+
                   console.log(table.toString());
                   rimraf(cwd, function(err) {
                     if (err) throw err;

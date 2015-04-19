@@ -6,10 +6,17 @@ module.exports = function(grunt) {
 
     jshint: {
       files: ['bin/pro', '*.js']
+    },
+
+    jscs: {
+      src: ['bin/pro', '*.js'],
+      options: {
+        config: '.jscsrc'
+      }
     }
 
   });
 
-  grunt.registerTask('default', ['jshint']);
+  grunt.registerTask('default', ['jshint', 'jscs']);
 
 };

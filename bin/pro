@@ -5,7 +5,7 @@
 /**
  * Module dependencies.
  */
- 
+
 var fs = require('fs');
 var https = require('https');
 var path = require('path');
@@ -34,7 +34,7 @@ program
           exec(url, function(err, stdout, stderr) {
             if (err) throw err;
             rimraf(path.join(process.cwd(), '.git'), function(err) {
-              if (err) throw err; 
+              if (err) throw err;
               console.log('\nDone, without errors.\n');
             });
           });
@@ -98,7 +98,7 @@ program
         });
       });
     } else {
-      console.log('pro set [user or file] [name]');  
+      console.log('pro set [user or file] [name]');
     }
   });
 
@@ -160,7 +160,7 @@ program
               if (err) throw err;
               var cwd = path.join(process.cwd(), 'profileslistings');
               rimraf(path.join(cwd, '.git'), function(err) {
-                if (err) throw err; 
+                if (err) throw err;
                 fs.readdir(cwd, function(err, files) {
                   if (err) throw err;
                   var table = new Table();

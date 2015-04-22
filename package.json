@@ -3,7 +3,7 @@
   "version": "1.2.0",
   "description": "Personal package manager that helps you to kickstart new projects.",
   "author": "Philip La <birkal@outlook.com>",
-  "main": "bin/extract",
+  "main": "bin/cli.js",
   "preferGlobal": true,
   "scripts": {
     "test": "grunt"
@@ -25,8 +25,7 @@
   "license": "MIT",
   "repository": "creaturephil/pro",
   "files": [
-    "LICENSE",
-    "bin/"
+    "lib"
   ],
   "dependencies": {
     "chalk": "^1.0.0",

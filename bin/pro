@@ -92,7 +92,7 @@ program
         if (err) throw err;
         console.log('[' + chalk.bold.gray('pro') + '] user set to ' + name);
       });
-    } else if (type === 'files') {
+    } else if (type === 'files' || type === 'file') {
       fs.exists(userPath, function(exists) {
         if (!exists) return console.log('Set your user: pro set user [name]');
         fs.writeFile(filePath, name, function(err) {
@@ -150,6 +150,7 @@ program
 
 program
   .command('files')
+  .alias('file')
   .description('Get a list of all your files.')
   .action(function(type, name) {
     fs.exists(userPath, function(exists) {

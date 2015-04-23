@@ -69,6 +69,15 @@ Getting "alpha" repository
 Done, without errors.
 ```
 
+If you want to specify a directory to install to:
+
+```js
+$ pro alpha newawesomeapp
+Getting "alpha" repository
+
+Done, without errors.
+```
+
 To set a repository for quickly installing a single file which you must set your
 Github username first to do this action:
 

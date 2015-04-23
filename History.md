@@ -2,6 +2,8 @@
 ==================
 
   * Rename bin/pro to lib/cli.js
+  * Add remove command
+  * Add optional directory to install to
 
 1.2.0 / 2015-04-22
 ==================

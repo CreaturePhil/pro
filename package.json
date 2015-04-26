@@ -6,7 +6,7 @@
   "main": "lib/pro.js",
   "preferGlobal": true,
   "scripts": {
-    "test": "grunt"
+    "test": "grunt && mocha"
   },
   "bin": {
     "pro": "./lib/pro.js"

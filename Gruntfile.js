@@ -5,11 +5,11 @@ module.exports = function(grunt) {
   grunt.initConfig({
 
     jshint: {
-      files: ['bin/pro', '*.js']
+      files: ['*.js', 'lib/*.js', 'test/*.js']
     },
 
     jscs: {
-      src: ['bin/pro', '*.js'],
+      src: ['*.js', 'lib/*.js', 'test/*.js'],
       options: {
         config: '.jscsrc'
       }

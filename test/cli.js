@@ -31,6 +31,7 @@ describe('Setting user and files', function() {
 });
 
 describe('Getting repos and files', function() {
+  //jscs:disable disallowMultipleVarDecl
   var alpha, index, Files;
 
   before(function() {
@@ -54,23 +55,24 @@ describe('Getting repos and files', function() {
       fs.exists(alpha, function(exists) {
         assert(exists, true);
         fs.readdir(alpha, function(err, files) {
-          if (err) done(err); 
+          if (err) done(err);
           assert.deepEqual(files.length, 11);
           files.forEach(function(file, index) {
             assert.deepEqual(file, Files[index]);
           });
+
           done();
         });
       });
     });
-  });  
+  });
 
   it('should get the file', function(done) {
     pro('index.html', null, function() {
       fs.exists(index, function(exists) {
-        assert(exists, true); 
+        assert(exists, true);
         done();
       });
-    }); 
+    });
   });
 });

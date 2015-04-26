@@ -3,13 +3,13 @@
   "version": "1.2.0",
   "description": "Personal package manager that helps you to kickstart new projects.",
   "author": "Philip La <birkal@outlook.com>",
-  "main": "bin/cli.js",
+  "main": "lib/pro.js",
   "preferGlobal": true,
   "scripts": {
     "test": "grunt"
   },
   "bin": {
-    "pro": "./bin/pro"
+    "pro": "./lib/pro.js"
   },
   "keywords": [
     "web",

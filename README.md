@@ -34,14 +34,14 @@ $ pro Showdown-Boilerplate
 ```bash
 Usage: pro [file or repository]
 
-
 Commands:
 
   *                  Get project files or repositories
   list               List your Github username or repository for files
   set <type> <name>  Set your Github username or repository for files
   repos              Get a list of all your repos.
-  files              Get a list of all your files.
+  files|file         Get a list of all your files.
+  remove <name>      Remove your Github username or repository for files
 
 Options:
 

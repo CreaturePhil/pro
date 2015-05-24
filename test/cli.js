@@ -3,7 +3,7 @@ var fs = require('fs');
 var path = require('path');
 var rimraf = require('rimraf');
 
-var pro = require('../lib/main');
+var pro = require('../src/get');
 
 describe('Getting repos and files', function() {
   //jscs:disable disallowMultipleVarDecl

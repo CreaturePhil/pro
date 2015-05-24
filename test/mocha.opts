@@ -1,2 +1,2 @@
 test/db.js test/cli.js
---timeout 20000
+--timeout 10000

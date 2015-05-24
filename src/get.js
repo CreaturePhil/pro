@@ -17,6 +17,10 @@ function get(source, target, cb) {
   if (typeof target !== 'string') target = '.';
   db.find(function(col) {
     if (!col.user) return console.log('Set your user: pro set user [name]');
+    if (source.indexOf('/') >= 0) {
+      var parts = source.split('/');
+      return getRepo(parts[1], target, parts[0], cb);
+    }
     if (this.parent && this.parent.dot) {
       return getRepo(source, target, col.user, cb);
     }
@@ -31,6 +35,15 @@ function get(source, target, cb) {
   }.bind(this));
 }
 
+/**
+ * Get a repository.
+ *
+ * @param {String} source
+ * @param {String} target
+ * @param {String} user
+ * @param {Function} cb
+ * @returns {undefined}
+ */
 function getRepo(source, target, user, cb) {
   if (target === '.') {
     console.log('Getting "' + source + '" repository');
@@ -57,6 +70,15 @@ function getRepo(source, target, user, cb) {
   });
 }
 
+/**
+ * Get a file.
+ *
+ * @param {String} source
+ * @param {String} user
+ * @param {String} file
+ * @param {Function} cb
+ * @returns {undefined}
+ */
 function getFile(source, user, file, cb) {
   if (!file) return console.log('Set your files: pro set files [name]');
   console.log('Getting "' + source + '" file');

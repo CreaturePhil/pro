@@ -18,15 +18,15 @@ $ npm install -g pro-cli
 
 Set Github username:
 
-```js
+```bash
 $ pro set user creaturephil
 ```
 
 Create a directory and get repository (installs in current directory):
 
-```js
-$ mkdir myawesomeapp && cd myawesomeapp
-$ pro Showdown-Boilerplate
+```bash
+$ mkdir todo && cd todo
+$ pro todo-boilerplate
 ```
 
 ## Usage
@@ -34,35 +34,37 @@ $ pro Showdown-Boilerplate
 ```bash
 Usage: pro [file or repository]
 
+
 Commands:
 
   *                  Get project files or repositories
   list               List your Github username or repository for files
   set <type> <name>  Set your Github username or repository for files
-  repos              Get a list of all your repos.
-  files|file         Get a list of all your files.
-  remove <name>      Remove your Github username or repository for files
+  repos|repo         Get a list of all your repos
+  files|file         Get a list of all your files
 
 Options:
 
   -h, --help     output usage information
   -V, --version  output the version number
+  -d, --dot      allow getting repositories that has a dot. Example: pro creaturephil.github.io
+  -n, --nodot    allow getting files that doesn't have dot. Example: pro LICENSE
 ```
 
-## Documentation
+## Guide
 
-pro uses Github to host your packages. This is because it is fast and easy to
+pro uses Github to host packages. This is because it is fast and easy to
 create a new one and push it to Github for immediate use. 
-The first thing you need to do is set Github username:
+The first thing you need to do is set Github username (alias: u):
 
-```js
+```bash
 $ pro set user CreaturePhil
 [pro] user set to CreaturePhil
 ```
 
 Then to get a repository that will install in the current directory:
 
-```js
+```bash
 $ pro alpha
 Getting "alpha" repository
 
@@ -71,51 +73,76 @@ Done, without errors.
 
 If you want to specify a directory to install to:
 
-```js
-$ pro alpha newawesomeapp
-Getting "alpha" repository
+```bash
+$ pro alpha express-project
+Getting "alpha" repository into "express-project" directory
 
 Done, without errors.
 ```
 
-To set a repository for quickly installing a single file which you must set your
-Github username first to do this action:
+To set a repository for quickly installing a single file (aliases: file, f):
 
-```js
+```bash
 $ pro set files scaffold
-[pro] files set to grid
+[pro] files set to scaffold
 ```
 
 Getting the file that will install in the current directory:
 
-```js
+```bash
 $ pro index.html
 Getting "index.html" file
 
 Done, without errors.
 ```
 
-The difference between getting a repository or a file is specifying the 
-character "__.__". `pro index` will get the index repository and `pro index.html`
-will get the index.html file from your files repository.
+The difference between getting a repository or a file is specifying a dot
+"__.__". `pro index` will get the index repository and `pro index.html`
+will get the index.html file from your files repository. To get a repository 
+with a dot __.__, use the `-d` or `--dot` option:
+
+```bash
+$ pro -d creaturephil.github.io
+Getting "creaturephil.github.io" repository
+
+Done, without errors.
+```
+
+To get a file without a dot __.__, use the '-n' or '--nodot' option:
+
+```bash
+$ pro -n LICENSE
+Getting "LICENSE" file
+
+Done, without errors.
+```
+
+Getting a repository without having to set a user:
+
+```bash
+$ pro fakesloth/buma
+Getting "buma" repository
+
+Done, without errors.
+```
 
 List your set Github username and files repository:
 
-```js
+```bash
 $ pro list
 User: CreaturePhil
 Files: scaffold
 ```
 
-List all Github repositories:
+List all Github repositories (alias: repo):
 
-```js
+```bash
 $ pro repos
 ```
 
-List all files:
+List all files (alias: file):
 
-```js
+```bash
 $ pro files
 ```
 

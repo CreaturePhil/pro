@@ -14,8 +14,8 @@ var set = require('./set');
 
 program
   .version('2.0.0')
-  .option('-d, --dot', 'Allow getting repositories that has a dot. Example: pro creaturephil.github.io')
-  .option('-n, --nodot', 'Allow getting files that doesn\'t have dot. Example: pro LICENSE')
+  .option('-d, --dot', 'allow getting repositories that has a dot. Example: pro creaturephil.github.io')
+  .option('-n, --nodot', 'allow getting files that doesn\'t have dot. Example: pro LICENSE')
   .usage('[file or repository]');
 
 program

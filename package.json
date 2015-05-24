@@ -9,7 +9,7 @@
     "test": "grunt && mocha"
   },
   "bin": {
-    "pro": "./lib/pro.js"
+    "pro": "./src/pro.js"
   },
   "keywords": [
     "web",

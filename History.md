@@ -5,6 +5,7 @@
   * Delete `remove` command
   * Add `-d` or `--dot` option to get repositories with a dot in them
   * Show directory when specify
+  * Rename `lib` folder to `src` folder
   * Fix cb error when getting and specifying a directroy
 
 1.3.1 / 2015-04-26

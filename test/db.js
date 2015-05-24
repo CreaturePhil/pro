@@ -1,5 +1,5 @@
 var assert = require('assert');
-var db = require('../lib/db');
+var db = require('../src/db');
 var fs = require('fs');
 var path = require('path');
 var jsonfile = path.join(__dirname, '..', 'db.json');

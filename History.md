@@ -3,6 +3,7 @@
 
   * Use a json file database
   * Delete `remove` command
+  * Add `-d` or `--dot` option to get repositories with a dot in them
   * Show directory when specify
   * Fix cb error when getting and specifying a directroy
 

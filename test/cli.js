@@ -12,7 +12,8 @@ describe('Getting repos and files', function() {
   before(function() {
     alpha = path.join(__dirname, '../alpha');
     index = path.join(__dirname, '../index.html');
-    Files = ['.gitignore', '.travis.yml', 'Gruntfile.js', 'Procfile', 'README.md', 'app', 'bin', 'config', 'package.json', 'server.js', 'test'];
+    Files = ['.gitignore', '.jscsrc', '.travis.yml', 'Gruntfile.js', 'LICENSE',
+      'Procfile', 'README.md', 'app', 'config', 'package.json', 'server.js', 'test'];
   });
 
   after(function(done) {
@@ -31,7 +32,7 @@ describe('Getting repos and files', function() {
         assert(exists, true);
         fs.readdir(alpha, function(err, files) {
           if (err) done(err);
-          assert.deepEqual(files.length, 11);
+          assert.deepEqual(files.length, 12);
           files.forEach(function(file, index) {
             assert.deepEqual(file, Files[index]);
           });

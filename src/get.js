@@ -17,46 +17,59 @@ function get(source, target, cb) {
   if (typeof target !== 'string') target = '.';
   db.find(function(col) {
     if (!col.user) return console.log('Set your user: pro set user [name]');
-    var url;
-    if (source.indexOf('.') <= -1 || (this.parent && this.parent.dot)) {
-      if (target === '.') {
-        console.log('Getting "' + source + '" repository');
-      } else {
-        console.log('Getting "' + source + '" repository into "' + target + '" directory');
-      }
+    if (this.parent && this.parent.dot) {
+      return getRepo(source, target, col.user, cb);
+    }
+    if (this.parent && this.parent.nodot) {
+      return getFile(source, col.user, col.file, cb);
+    }
+    if (source.indexOf('.') <= -1) {
+      getRepo(source, target, col.user, cb);
+    } else {
+      getFile(source, col.user, col.file, cb);
+    }
+  }.bind(this));
+}
 
-      url = 'git clone -q --depth=1 https://github.com/' + col.user + '/' + source + '.git ' + target;
-      exec(url, function(err, stdout, stderr) {
+function getRepo(source, target, user, cb) {
+  if (target === '.') {
+    console.log('Getting "' + source + '" repository');
+  } else {
+    console.log('Getting "' + source + '" repository into "' + target + '" directory');
+  }
+
+  var url = 'git clone -q --depth=1 https://github.com/' + user + '/' + source + '.git ' + target;
+  exec(url, function(err, stdout, stderr) {
+    if (err) throw err;
+    if (target === '.') {
+      rimraf(path.join(process.cwd(), '.git'), function(err) {
         if (err) throw err;
-        if (target === '.') {
-          rimraf(path.join(process.cwd(), '.git'), function(err) {
-            if (err) throw err;
-            if (typeof cb === 'function') cb();
-            console.log(chalk.green('\nDone, without errors.\n'));
-          });
-        } else {
-          rimraf(path.join(process.cwd(), target, '.git'), function(err) {
-            if (err) throw err;
-            if (typeof cb === 'function') cb();
-            console.log(chalk.green('\nDone, without errors.\n'));
-          });
-        }
+        if (typeof cb === 'function') cb();
+        console.log(chalk.green('\nDone, without errors.\n'));
       });
     } else {
-      if (!col.file) return console.log('Set your files: pro set files [name]');
-      console.log('Getting "' + source + '" file');
-      var localFile = fs.createWriteStream(path.join(process.cwd(), source));
-      url = 'https://raw.githubusercontent.com/' + col.user + '/' + col.file + '/master/' + source;
-      https.get(url, function(response) {
-        if (response.statusCode === 404) throw new Error('404 Not Found');
-        response.pipe(localFile);
-        localFile.on('finish', function() {
-          localFile.close();
-          console.log(chalk.green('\nDone, without errors.\n'));
-          if (cb) cb();
-        });
+      rimraf(path.join(process.cwd(), target, '.git'), function(err) {
+        if (err) throw err;
+        if (typeof cb === 'function') cb();
+        console.log(chalk.green('\nDone, without errors.\n'));
       });
     }
+  });
+}
+
+function getFile(source, user, file, cb) {
+  if (!file) return console.log('Set your files: pro set files [name]');
+  console.log('Getting "' + source + '" file');
+  var localFile = fs.createWriteStream(path.join(process.cwd(), source));
+  var url = 'https://raw.githubusercontent.com/' + user + '/' + file + '/master/' + source;
+  https.get(url, function(response) {
+    if (response.statusCode === 404) throw new Error('404 Not Found');
+    response.pipe(localFile);
+    localFile.on('finish', function() {
+      localFile.close();
+      console.log(chalk.green('\nDone, without errors.\n'));
+      if (cb) cb();
+    });
   });
 }
 

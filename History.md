@@ -2,6 +2,7 @@
 =================
 
   * Use a json file database
+  * Delete `remove` command
 
 1.3.1 / 2015-04-26
 ==================

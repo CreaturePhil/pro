@@ -19,7 +19,6 @@ describe('db#set', function() {
     }, 100);
   });
 
-
   it('should set file', function(done) {
     db.set('file', 'grid');
     setTimeout(function() {
@@ -41,7 +40,7 @@ describe('db#find', function() {
       assert.deepEqual(typeof user, 'string');
       assert.deepEqual(user, 'CreaturePhil');
       done();
-    }); 
+    });
   });
 
   it('should get file', function(done) {
@@ -49,7 +48,7 @@ describe('db#find', function() {
       assert.deepEqual(typeof file, 'string');
       assert.deepEqual(file, 'grid');
       done();
-    }); 
+    });
   });
 
   it('should get the whole collection', function(done) {

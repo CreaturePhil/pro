@@ -14,7 +14,7 @@ var set = require('./set');
 
 program
   .version('2.0.0')
-  .option('-d', '--dot', 'Allow getting repositories that has a dot in the name')
+  .option('-d, --dot', 'Allow getting repositories that has a dot in the name')
   .usage('[file or repository]');
 
 program
@@ -44,7 +44,8 @@ program
   .description('Get a list of all your files')
   .action(list.files);
 
-program.parse(process.argv);
+program
+  .parse(process.argv);
 
 if (!process.argv.slice(2).length) {
   program.outputHelp();

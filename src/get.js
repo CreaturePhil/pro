@@ -18,9 +18,7 @@ function get(source, target, cb) {
   db.find(function(col) {
     if (!col.user) return console.log('Set your user: pro set user [name]');
     var url;
-    if (source.indexOf('.') <= -1 || process.argv[2] === '-d' || process.argv[3] === '-d' ||
-        process.argv[2] === '--dot' || process.argv[3] === '--dot') {
-
+    if (source.indexOf('.') <= -1 || this.parent.dot) {
       if (target === '.') {
         console.log('Getting "' + source + '" repository');
       } else {

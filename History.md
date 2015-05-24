@@ -3,6 +3,8 @@
 
   * Use a json file database
   * Delete `remove` command
+  * Show directory when specify
+  * Fix cb error when getting and specifying a directroy
 
 1.3.1 / 2015-04-26
 ==================

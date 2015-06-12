@@ -1,6 +1,6 @@
 {
   "name": "pro-cli",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Personal package manager that helps you to kickstart new projects.",
   "author": "Philip La <birkal@outlook.com>",
   "main": "src/pro.js",

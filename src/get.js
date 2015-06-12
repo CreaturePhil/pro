@@ -21,10 +21,10 @@ function get(source, target, cb) {
       var parts = source.split('/');
       return getRepo(parts[1], target, parts[0], cb);
     }
-    if (this.parent && this.parent.dot) {
+    if (this.dot) {
       return getRepo(source, target, col.user, cb);
     }
-    if (this.parent && this.parent.nodot) {
+    if (this.nodot) {
       return getFile(source, col.user, col.file, cb);
     }
     if (source.indexOf('.') <= -1) {

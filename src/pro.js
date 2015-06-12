@@ -6,50 +6,63 @@
  * Module dependencies.
  */
 
-var program = require('commander');
-
+var fs = require('fs');
 var get = require('./get');
 var list = require('./list');
 var set = require('./set');
 
-program
-  .version('2.0.0')
-  .option('-d, --dot', 'allow getting repositories that has a dot. Example: pro creaturephil.github.io')
-  .option('-n, --nodot', 'allow getting files that doesn\'t have dot. Example: pro LICENSE')
-  .usage('[file or repository]');
+var commands = {
+  set: set,
+  list: list.set,
+  repos: list.repos,
+  repo: list.repos,
+  files: list.files,
+  file: list.files
+};
 
-program
-  .command('*')
-  .description('Get project files or repositories')
-  .action(get);
-
-program
-  .command('list')
-  .description('List your Github username or repository for files')
-  .action(list.set);
-
-program
-  .command('set <type> <name>')
-  .description('Set your Github username or repository for files')
-  .action(set);
-
-program
-  .command('repos')
-  .alias('repo')
-  .description('Get a list of all your repos')
-  .action(list.repos);
-
-program
-  .command('files')
-  .alias('file')
-  .description('Get a list of all your files')
-  .action(list.files);
-
-program
-  .parse(process.argv);
-
-if (!process.argv.slice(2).length) {
-  program.outputHelp();
+/**
+ * Check to see if `process.argv` has an option.
+ *
+ * @param {String} opt
+ * @returns {Boolean}
+ */
+function options(opt) {
+  return process.argv.indexOf(opt) >= 0;
 }
 
-module.exports = program;
+var args = process.argv.slice(2);
+if (!args.length || options('-h') || options('--help')) {
+  fs.readFile(__dirname + '/help.txt', function(err, file) {
+    if (err) throw new Error(err);
+    console.log(file.toString()); 
+  });
+} else if (options('-V') || options('--version')) {
+  console.log('v2.1.0');  
+} else if (commands[args[0]]) {
+  commands[args[0]].apply(null, args.slice(1));
+} else {
+  var parent = this.parent = { args: args };
+  if (options('-d')) handleDots(parent, '-d');
+  if (options('--dot')) handleDots(parent, '--dot');
+  if (options('-n')) handleDots(parent, '-n');
+  if (options('--nodot')) handleDots(parent, '--nodot');
+
+  get.apply(parent, parent.args);
+}
+
+/**
+ * Handling in dot and no dot options.
+ *
+ * @param {Object} parent
+ * @param {String} option
+ * @returns {undefined}
+ */
+function handleDots(parent, option) {
+  if (option === '-d' || option === '--dot') {
+    parent.dot = true;
+  }
+  if (option === '-n' || option === '--nodot') {
+    parent.nodot = true;
+  }
+  parent.args.splice(args.indexOf(option), 1);
+}

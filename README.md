@@ -49,6 +49,7 @@ Options:
   -V, --version  output the version number
   -d, --dot      allow getting repositories that has a dot. Example: pro creaturephil.github.io
   -n, --nodot    allow getting files that doesn't have dot. Example: pro LICENSE
+  -g, --git      clone the whole git repository, keeping `.git`
 ```
 
 ## Guide

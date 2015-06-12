@@ -32,6 +32,8 @@ if (!args.length || options('-h') || options('--help')) {
   commands[args[0]].apply(null, args.slice(1));
 } else {
   var parent = this.parent = { args: args };
+  if (options('-g')) handleDots(parent, '-g');
+  if (options('--git')) handleDots(parent, '--git');
   if (options('-d')) handleDots(parent, '-d');
   if (options('--dot')) handleDots(parent, '--dot');
   if (options('-n')) handleDots(parent, '-n');
@@ -48,6 +50,9 @@ if (!args.length || options('-h') || options('--help')) {
  * @returns {undefined}
  */
 function handleDots(parent, option) {
+  if (option === '-g' || option === '--git') {
+    parent.git = true;
+  }
   if (option === '-d' || option === '--dot') {
     parent.dot = true;
   }

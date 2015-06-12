@@ -21,6 +21,9 @@ function get(source, target, cb) {
       var parts = source.split('/');
       return getRepo(parts[1], target, parts[0], cb);
     }
+    if (this.git) {
+      return getGitRepo(source, target, col.user);
+    }
     if (this.dot) {
       return getRepo(source, target, col.user, cb);
     }
@@ -33,6 +36,29 @@ function get(source, target, cb) {
       getFile(source, col.user, col.file, cb);
     }
   }.bind(this));
+}
+
+/**
+ * Get a whole git repository keeping `.git` directory.
+ *
+ * @param {String} source
+ * @param {String} target
+ * @param {String} user
+ * @returns {undefined}
+ */
+function getGitRepo(source, target, user) {
+  if (target === '.') {
+    target = '';
+    console.log('Getting "' + source + '" repository');
+  } else {
+    console.log('Getting "' + source + '" repository into "' + target + '" directory');
+  }
+
+  var url = 'git clone -q https://github.com/' + user + '/' + source + '.git ' + target;
+  exec(url, function(err, stdout, stderr) {
+    if (err) throw err;
+    console.log(chalk.green('\nDone, without errors.\n'));
+  });
 }
 
 /**

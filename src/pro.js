@@ -20,16 +20,6 @@ var commands = {
   file: list.files
 };
 
-/**
- * Check to see if `process.argv` has an option.
- *
- * @param {String} opt
- * @returns {Boolean}
- */
-function options(opt) {
-  return process.argv.indexOf(opt) >= 0;
-}
-
 var args = process.argv.slice(2);
 if (!args.length || options('-h') || options('--help')) {
   fs.readFile(__dirname + '/help.txt', function(err, file) {
@@ -65,4 +55,14 @@ function handleDots(parent, option) {
     parent.nodot = true;
   }
   parent.args.splice(args.indexOf(option), 1);
+}
+
+/**
+ * Check to see if `process.argv` has an option.
+ *
+ * @param {String} opt
+ * @returns {Boolean}
+ */
+function options(opt) {
+  return process.argv.indexOf(opt) >= 0;
 }

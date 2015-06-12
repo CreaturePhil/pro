@@ -27,7 +27,7 @@ if (!args.length || options('-h') || options('--help')) {
     console.log(file.toString()); 
   });
 } else if (options('-V') || options('--version')) {
-  console.log('v2.1.0');  
+  console.log('v2.2.0');  
 } else if (commands[args[0]]) {
   commands[args[0]].apply(null, args.slice(1));
 } else {
